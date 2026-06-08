@@ -1,16 +1,19 @@
 from Order import Order
 from Status import OrderStatus
 from Coffee import CoffeeMachine
+from Scheduler import Scheduler
 
 def main():
-    order = Order(oid =1, status=OrderStatus.PENDING, quantity = 3)
+    orders = [
+        Order(1,3),
+        Order(2,2),
+        Order(3,3)
+    ]
+
     coffee = CoffeeMachine()
 
-    print(f"[main] \n order:{order.oid} \n Status: {order.quantity}")
-    order.status = OrderStatus.RUNNING
-    print(f"[main] \n update:{order.status.name}")
-    coffee.make(order.quantity)
-    order.status = OrderStatus.COMPLETED
-    print(f"[main] \n order: {order.oid} \n update:{order.status.name}")
+    scheduler = Scheduler(orders,coffee)
+    scheduler.run()
+    
 if __name__ ==  "__main__":
         main()
